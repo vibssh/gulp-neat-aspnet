@@ -31,7 +31,7 @@ module.exports = yeoman.generators.Base.extend({
   createFolders : function() {
     this.mkdir("app"); // Base Directory
     // Bower Folder
-    this.mkdir("app/sass/components")
+    this.mkdir("app/sass/bower_components")
     // Sass Folders
     this.mkdir("app/sass");
     this.mkdir("app/sass/Base");

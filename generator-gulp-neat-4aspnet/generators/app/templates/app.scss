@@ -1,13 +1,13 @@
 // Third Party Libraries
-@import "components/bourbon/app/assets/stylesheets/bourbon";
-@import "components/neat/app/assets/stylesheets/neat";
+@import "bower_components/bourbon/app/assets/stylesheets/bourbon";
+@import "bower_components/neat/app/assets/stylesheets/neat";
 @import "compass";
 @import "breakpoint";
 
 // Reset - Normalize is what we use.
 //@import "reset";
 
-@import "components/normalize-scss/normalize";
+@import "bower_components/normalize-scss/normalize";
 
 // Partial Files
 @import "Base/breakpoints";
