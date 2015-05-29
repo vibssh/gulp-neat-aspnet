@@ -82,7 +82,7 @@ gulp.task('compass', function() {
         .pipe(rename({suffix: '.min'}))
         .pipe(gulp.dest(dest.css))
         .pipe(notify({message: cssMessage}))
-        .pipe(livereload()); 
+        .pipe(livereload());
 });
 
 
@@ -100,16 +100,17 @@ gulp.task('image', function() {
 
 // HTML Task Here
 gulp.task('template', function() {
-  
+
 });
 
 
 // Clean up files that we don't need post build
 gulp.task('clean', function() {
   return gulp
-        .src('css/*.css') // Source of Folder to clean the files from
+        .src('css/*.css', {read: false}) // Source of Folder to clean the files from
         .pipe(ignore('*.min.css')) // Ignore files that don't need cleanup
         .pipe(rimraf()) // Actual clean up plugin
+        .pipe(notify({message: cleanUp }))
         .pipe(livereload()); // This is for Browser-Sync
 });
 
@@ -118,7 +119,7 @@ gulp.task('clean', function() {
 gulp.task('watch', function() {
         livereload.listen();
         gulp.watch(paths.sass, ['compass']);  // Compass Watch
-        gulp.watch('app/css/*.css', ['clean']); // Clean Watch
+        gulp.watch('css/*.css', ['clean']); // Clean Watch
         gulp.watch(paths.img, ['image']); // ImageMin Watch
         gulp.watch(paths.template, ['template']).on('change', livereload.changed); // Template Watch
 });
