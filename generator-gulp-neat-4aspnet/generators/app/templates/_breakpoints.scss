@@ -1,3 +1,9 @@
 // Define your Site Breakpoints here
 
-//$tablet : 768px; example
+// Major Breakpoints - Standard sizes - Please add as many breakpoints needs as per the content / design NOT Devices
+
+$small		: 28.125em; /*  450/16 */
+$medium		: 48.000em; /*  768/16 */
+$large		: 64.000em; /* 1024/16 */
+$x-large	: 75.000em; /* 1200/16 */
+$xx-large	: 120.000em; /* 1920/16 */

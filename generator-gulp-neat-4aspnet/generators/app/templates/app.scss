@@ -1,22 +1,24 @@
+// Reset File
+@import "bower_components/normalize-scss/normalize";
+
 // Third Party Libraries
 @import "bower_components/bourbon/app/assets/stylesheets/bourbon";
+@import "Elements/grid_settings"; // This is to override Neat Settings
 @import "bower_components/neat/app/assets/stylesheets/neat";
 @import "compass";
 @import "breakpoint";
 
-// Reset - Normalize is what we use.
-//@import "reset";
-
-@import "bower_components/normalize-scss/normalize";
-
 // Partial Files
+/* Base Section */
+@import "Base/base";
 @import "Base/breakpoints";
 @import "Base/variables";
 @import "Base/mixins";
 @import "Base/typography";
-@import "Elements/layout";
-@import "Modules/nav";
-@import "Modules/editor";
 
+/* Element Section */
+
+
+/* Modules Section */
 
 // Write your Styles below REPLACE THE BELOW STYLES

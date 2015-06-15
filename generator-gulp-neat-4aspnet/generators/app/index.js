@@ -29,7 +29,8 @@ module.exports = yeoman.generators.Base.extend({
 
   // Create Directories for the Project
   createFolders : function() {
-    this.mkdir("app"); // Base Directory
+    // Base Directory
+    this.mkdir("app"); 
     // Bower Folder
     this.mkdir("app/sass/bower_components")
     // Sass Folders
@@ -38,8 +39,10 @@ module.exports = yeoman.generators.Base.extend({
     this.mkdir("app/sass/Elements");
     this.mkdir("app/sass/Modules");
     //Scripts Folder
-    this.mkdir("app/scripts");
-    this.mkdir("app/scripts/vendor");
+    this.mkdir("app/js");
+    this.mkdir("app/js/vendor");
+    this.mkdir("app/js/scripts");
+    this.mkdir("app/js/startup");
     //Images Folder
     this.mkdir("app/images");
   },
@@ -60,7 +63,7 @@ module.exports = yeoman.generators.Base.extend({
     this.copy('_typography.scss', 'app/sass/Base/_typography.scss');
 
     /* Element Files */
-    this.copy('_layout.scss','app/sass/Elements/_layout.scss');
+    this.copy('_layout.scss', 'app/sass/Elements/_grid_settings.scss');
 
     /* Module Files */
     this.copy('_nav.scss', 'app/sass/Modules/_nav.scss');
@@ -69,9 +72,19 @@ module.exports = yeoman.generators.Base.extend({
     /* Main import File */
     this.copy('app.scss', 'app/sass/app.scss');
 
-    //SCRIPT this is intentionally left out as the Backend Guys are going to use .NET Bundles to sort the JS
-
-  },
+    //JS Files
+    /* Vendor Library Files */
+    // jQuery & Modernizr is coming via cdn with migrate tool for jQuery to support legacy browser
+    this.copy('inhertiance.js', 'app/js/vendor/inheritance.js');
+    this.copy('SmoothScroll.js', 'app/js/vendor/SmoothScroll.js');
+    /* Startup Files */
+    this.copy('Base.js', 'app/js/startup/Base.js');
+    this.copy('Controller.js', 'app/js/startup/Controller.js');
+    this.copy('ControllerBinder.js', 'app/js/startup/ControllerBinder.js');
+    /* Custom JS Files - This is are sample files recreate for the app */
+    this.copy('CallToAction.js', 'app/js/scripts/CallToAction.js');
+    this.copy('Jumbotron.js', 'app/js/scripts/Jumbotron.js');
+ },
 
   writing: {
     app: function () {
