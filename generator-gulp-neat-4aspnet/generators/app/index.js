@@ -45,6 +45,8 @@ module.exports = yeoman.generators.Base.extend({
     this.mkdir("app/js/startup");
     //Images Folder
     this.mkdir("app/images");
+    //Fonts Folder
+    this.mkdir("fonts");
   },
 
   //Create Files within the App Directory
@@ -63,7 +65,7 @@ module.exports = yeoman.generators.Base.extend({
     this.copy('_typography.scss', 'app/sass/Base/_typography.scss');
 
     /* Element Files */
-    this.copy('_layout.scss', 'app/sass/Elements/_grid_settings.scss');
+    this.copy('_grid_settings.scss', 'app/sass/Elements/_grid_settings.scss');
 
     /* Module Files */
     this.copy('_nav.scss', 'app/sass/Modules/_nav.scss');
@@ -75,7 +77,7 @@ module.exports = yeoman.generators.Base.extend({
     //JS Files
     /* Vendor Library Files */
     // jQuery & Modernizr is coming via cdn with migrate tool for jQuery to support legacy browser
-    this.copy('inhertiance.js', 'app/js/vendor/inheritance.js');
+    this.copy('inheritance.js', 'app/js/vendor/inheritance.js');
     this.copy('SmoothScroll.js', 'app/js/vendor/SmoothScroll.js');
     /* Startup Files */
     this.copy('Base.js', 'app/js/startup/Base.js');
@@ -84,6 +86,10 @@ module.exports = yeoman.generators.Base.extend({
     /* Custom JS Files - This is are sample files recreate for the app */
     this.copy('CallToAction.js', 'app/js/scripts/CallToAction.js');
     this.copy('Jumbotron.js', 'app/js/scripts/Jumbotron.js');
+
+    /* Sample file DELETE After Structuring the layout */
+    this.copy('Sample-4-footer.html', 'Sample-4-footer.html');
+
  },
 
   writing: {

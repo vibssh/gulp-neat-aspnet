@@ -21,8 +21,9 @@ var gulp          = require('gulp'),
     rimraf        = require('gulp-rimraf'), // Cleaning CSS file generated
     gutil         = require('gulp-util'),   // Utility like beep when error
     plumber       = require('gulp-plumber'), // This is used so that the gulp watch doesn't break even though error
-    imagemin      = require('gulp-imagemin'),
-    pngcrush      = require('imagemin-pngcrush'),
+    imageop       = require('gulp-image-optimization'),
+    autoprefixer  = require('gulp-autoprefixer'),
+    cache         = require('gulp-cache'),
     notify        = require('gulp-notify'),
     livereload    = require('gulp-livereload');
 
@@ -30,7 +31,7 @@ var gulp          = require('gulp'),
 var paths = {
     sass        : 'app/sass/**/*.scss',
     stylesheet  : 'app/sass',
-    img         : 'app/images/*',
+    img         : 'app/images/**/*',
     template    : 'Views/**/*.cshtml'
 };
 
@@ -49,14 +50,11 @@ var onError = function (){
   this.emit('end');
 };
 
-
 // Notification Centre
 var cleanUp       = "Cleanup Done";
 var cssMessage    = "Compass Compilation Done";
 var htmlMessage   = "HTML Changes Reloaded";
 var imgMesssage   = "Images Compressed";
-
-
 
 /* ==========================
 
@@ -76,8 +74,11 @@ gulp.task('compass', function() {
             sass        : paths.stylesheet,
             css         : dest.css,
             require     : modules
-
         }))
+        .pipe(autoprefixer({
+            browsers: ['last 2 versions'],
+            cascade : false
+        }))        
         .pipe(cssmin())
         .pipe(rename({suffix: '.min'}))
         .pipe(gulp.dest(dest.css))
@@ -85,29 +86,29 @@ gulp.task('compass', function() {
         .pipe(livereload());
 });
 
-
-
 // Image Minfication Tasks Here
-gulp.task('image', function() {
-  return gulp
-        .src(paths.img)
-        .pipe(imagemin())
-        .pipe(gulp.dest(dest.image))
-        .pipe(notify({message: imgMesssage}))
-        .pipe(livereload()); // This is for Browser-Sync
+gulp.task('images', function () {
+    return gulp
+          .src(paths.img)
+          .pipe(cache(imageop({
+              optimizationLevel: 5,
+              progressive: true,
+              interlaced: true
+          })))
+          .pipe(gulp.dest(dest.image))
+          .pipe(notify({ message: imgMesssage }))
+          .pipe(livereload()); 
 });
-
 
 // HTML Task Here
 gulp.task('template', function() {
 
 });
 
-
 // Clean up files that we don't need post build
 gulp.task('clean', function() {
   return gulp
-        .src('css/*.css', {read: false}) // Source of Folder to clean the files from
+        .src('Css/*.css', {read: false}) // Source of Folder to clean the files from
         .pipe(ignore('*.min.css')) // Ignore files that don't need cleanup
         .pipe(rimraf()) // Actual clean up plugin
         .pipe(notify({message: cleanUp }))
@@ -119,13 +120,13 @@ gulp.task('clean', function() {
 gulp.task('watch', function() {
         livereload.listen();
         gulp.watch(paths.sass, ['compass']);  // Compass Watch
-        gulp.watch('css/*.css', ['clean']); // Clean Watch
-        gulp.watch(paths.img, ['image']); // ImageMin Watch
+        gulp.watch('Css/*.css', ['clean']); // Clean Watch
+        gulp.watch(paths.img, ['images']); // ImageMin Watch
         gulp.watch(paths.template, ['template']).on('change', livereload.changed); // Template Watch
 });
 
 // Build Task here
-gulp.task('build', ['compass', 'clean','image', 'template']).on('change',livereload.changed);
+gulp.task('build', ['compass', 'clean','images', 'template']).on('change',livereload.changed);
 
 // Default Tasks
 gulp.task('default', ['build', 'watch']); // Default Task
