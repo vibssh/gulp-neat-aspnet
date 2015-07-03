@@ -2,7 +2,7 @@
 
   ==================================================
   ** Project : Gulpfile for Gulp-Neat-ASPNET
-  ** Version : 0.0.0
+  ** Version : 0.0.1
   ** Author  : Leo Jacobs
   ** Date    : 21.05.2015
   ==================================================
@@ -107,7 +107,7 @@ gulp.task('template', function() {
 // Clean up files that we don't need post build
 gulp.task('clean', function() {
   return gulp
-        .src('css/*.css', {read: false}) // Source of Folder to clean the files from
+        .src('Css/*.css', {read: false}) // Source of Folder to clean the files from
         .pipe(ignore('*.min.css')) // Ignore files that don't need cleanup
         .pipe(rimraf()) // Actual clean up plugin
         .pipe(notify({message: cleanUp }))
@@ -119,7 +119,7 @@ gulp.task('clean', function() {
 gulp.task('watch', function() {
         livereload.listen();
         gulp.watch(paths.sass, ['compass']);  // Compass Watch
-        gulp.watch('css/*.css', ['clean']); // Clean Watch
+        gulp.watch('Css/*.css', ['clean']); // Clean Watch
         gulp.watch(paths.img, ['image']); // ImageMin Watch
         gulp.watch(paths.template, ['template']).on('change', livereload.changed); // Template Watch
 });

@@ -1,20 +1,27 @@
-// Third Party Libraries
+// Reset Files 
+@import "bower_components/normalize-scss/normalize";
+
+//Third Party Libraries
 @import "bower_components/bourbon/app/assets/stylesheets/bourbon";
+@import "Elements/grid-settings";
 @import "bower_components/neat/app/assets/stylesheets/neat";
 @import "compass";
 @import "breakpoint";
 
-// Reset - Normalize is what we use.
-//@import "reset";
 
-@import "bower_components/normalize-scss/normalize";
 
 // Partial Files
+
+/* Base Section */
 @import "Base/breakpoints";
 @import "Base/variables";
 @import "Base/mixins";
 @import "Base/typography";
+
+/* Element Section */
 @import "Elements/layout";
+
+/* Modules Section */
 @import "Modules/nav";
 @import "Modules/editor";
 

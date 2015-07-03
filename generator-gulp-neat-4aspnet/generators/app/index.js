@@ -2,6 +2,7 @@
 var yeoman = require('yeoman-generator');
 var chalk = require('chalk');
 var yosay = require('yosay');
+var mkdirp = require('mkdirp');
 
 module.exports = yeoman.generators.Base.extend({
   prompting: function () {
@@ -29,19 +30,19 @@ module.exports = yeoman.generators.Base.extend({
 
   // Create Directories for the Project
   createFolders : function() {
-    this.mkdir("app"); // Base Directory
+    mkdirp("app"); // Base Directory
     // Bower Folder
-    this.mkdir("app/sass/bower_components")
+    mkdirp("bower_components");
     // Sass Folders
-    this.mkdir("app/sass");
-    this.mkdir("app/sass/Base");
-    this.mkdir("app/sass/Elements");
-    this.mkdir("app/sass/Modules");
+    mkdirp("app/sass");
+    mkdirp("app/sass/Base");
+    mkdirp("app/sass/Elements");
+    mkdirp("app/sass/Modules");
     //Scripts Folder
-    this.mkdir("app/scripts");
-    this.mkdir("app/scripts/vendor");
+    mkdirp("app/scripts");
+    mkdirp("app/scripts/vendor");
     //Images Folder
-    this.mkdir("app/images");
+    mkdirp("app/images");
   },
 
   //Create Files within the App Directory
@@ -61,6 +62,7 @@ module.exports = yeoman.generators.Base.extend({
 
     /* Element Files */
     this.copy('_layout.scss','app/sass/Elements/_layout.scss');
+    this.copy('_grid-settings.scss', 'app/sass/Elements/_grid-settings.scss');
 
     /* Module Files */
     this.copy('_nav.scss', 'app/sass/Modules/_nav.scss');
@@ -69,7 +71,21 @@ module.exports = yeoman.generators.Base.extend({
     /* Main import File */
     this.copy('app.scss', 'app/sass/app.scss');
 
-    //SCRIPT this is intentionally left out as the Backend Guys are going to use .NET Bundles to sort the JS
+    //JS Files
+    /* Vendor Library Files */
+    // jQuery & Modernizr is coming via cdn with migrate tool for jQuery to support legacy browser
+    this.copy('inheritance.js', 'app/js/vendor/inheritance.js');
+    this.copy('SmoothScroll.js', 'app/js/vendor/SmoothScroll.js');
+    /* Startup Files */
+    this.copy('Base.js', 'app/js/startup/Base.js');
+    this.copy('Controller.js', 'app/js/startup/Controller.js');
+    this.copy('ControllerBinder.js', 'app/js/startup/ControllerBinder.js');
+    /* Custom JS Files - This is are sample files recreate for the app */
+    this.copy('CallToAction.js', 'app/js/scripts/CallToAction.js');
+    this.copy('Jumbotron.js', 'app/js/scripts/Jumbotron.js');
+
+    /* Sample file DELETE After Structuring the layout */
+    this.copy('Sample-4-footer.html', 'Sample-4-footer.html');
 
   },
 

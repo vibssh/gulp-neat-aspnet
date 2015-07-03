@@ -1,6 +1,6 @@
 {
   "name": "generator-gulp-neat-4aspnet",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "description": "Yeoman generator",
   "license": "MIT",
   "main": "app/index.js",
@@ -25,6 +25,7 @@
     "yosay": "^1.0.2"
   },
   "devDependencies": {
+    "mkdirp": "^0.5.1",
     "mocha": "*"
   }
 }
