@@ -39,8 +39,9 @@ module.exports = yeoman.generators.Base.extend({
     mkdirp("app/sass/Elements");
     mkdirp("app/sass/Modules");
     //Scripts Folder
-    mkdirp("app/scripts");
-    mkdirp("app/scripts/vendor");
+    mkdirp("scripts/startup");
+    mkdirp("scripts/scripts");
+    mkdirp("scripts/vendor");
     //Images Folder
     mkdirp("app/images");
   },
@@ -74,15 +75,15 @@ module.exports = yeoman.generators.Base.extend({
     //JS Files
     /* Vendor Library Files */
     // jQuery & Modernizr is coming via cdn with migrate tool for jQuery to support legacy browser
-    this.copy('inheritance.js', 'app/js/vendor/inheritance.js');
-    this.copy('SmoothScroll.js', 'app/js/vendor/SmoothScroll.js');
+    this.copy('inheritance.js', 'scripts/vendor/inheritance.js');
+    this.copy('SmoothScroll.js', 'scripts/vendor/SmoothScroll.js');
     /* Startup Files */
-    this.copy('Base.js', 'app/js/startup/Base.js');
-    this.copy('Controller.js', 'app/js/startup/Controller.js');
-    this.copy('ControllerBinder.js', 'app/js/startup/ControllerBinder.js');
+    this.copy('Base.js', 'scripts/startup/Base.js');
+    this.copy('Controller.js', 'scripts/startup/Controller.js');
+    this.copy('ControllerBinder.js', 'scripts/startup/ControllerBinder.js');
     /* Custom JS Files - This is are sample files recreate for the app */
-    this.copy('CallToAction.js', 'app/js/scripts/CallToAction.js');
-    this.copy('Jumbotron.js', 'app/js/scripts/Jumbotron.js');
+    this.copy('CallToAction.js', 'scripts/scripts/CallToAction.js');
+    this.copy('Jumbotron.js', 'scripts/scripts/Jumbotron.js');
 
     /* Sample file DELETE After Structuring the layout */
     this.copy('Sample-4-footer.html', 'Sample-4-footer.html');
